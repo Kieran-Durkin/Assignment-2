@@ -1,0 +1,159 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            background-color: #472f32;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icongrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            justify-items: center;
+        }
+
+        .icongrid img {
+            width: clamp(80px, 10vw, 160px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .icongrid img:hover:not(.pressed):not(.shaking) {
+            transform: scale(1.05);
+        }
+
+        .pressed {
+            animation: bounceBack 0.35s cubic-bezier(0.2, 1.2, 0.3, 1);
+        }
+
+        @keyframes bounceBack {
+            0% { transform: scale(0.9); }
+            60% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        .shaking {
+            animation: shake 0.15s infinite;
+            display: inline-block;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(1px, -1px) rotate(-1deg); }
+            50% { transform: translate(-1px, 1px) rotate(1deg); }
+            75% { transform: translate(1px, 1px) rotate(0deg); }
+            100% { transform: translate(0px, 0px) rotate(-1deg); }
+        }
+    </style>
+
+    <title>My Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
+</head>
+
+<body>
+
+<div class="icongrid">
+
+    <img id="Timeline_Icon" src="img/Timeline_Icon.svg">
+    <img id="Archive_Icon" src="img/Archive_Icon.svg">
+    <img id="Diary_Icon" src="img/Diary_Icon.svg">
+    <img id="Favourites_Icon" src="img/Favourites_Icon.svg">
+    <img id="Settings_Icon" src="img/Settings_Icon.svg">
+    <img id="Media_Icon" src="img/Media_Icon.svg">
+    <img id="Share_Icon" src="img/Share_Icon.svg">
+    <img id="Search_Icon" src="img/Search_Icon.svg">
+    <img id="Location_Icon" src="img/Location_Icon.svg">
+
+</div>
+
+<script>
+    var sound1 = new buzz.sound("sound/ticks.mp3");
+    var sound2 = new buzz.sound("sound/files.mp3");
+    var sound3 = new buzz.sound("sound/pen.wav");
+    var sound4 = new buzz.sound("sound/star.mp3");
+    var sound5 = new buzz.sound("sound/gears.mp3");
+    var sound6 = new buzz.sound("sound/media.mp3");
+    var sound7 = new buzz.sound("sound/512410__kievinay__paper-rattling.mp3");
+    var sound8 = new buzz.sound("sound/searching.wav");
+    var sound9 = new buzz.sound("sound/flag.wav");
+    var sound10 = new buzz.sound("sound/click.mp3");
+
+    window.onload = function () {
+
+        const map = {
+            "Timeline_Icon": sound1,
+            "Archive_Icon": sound2,
+            "Diary_Icon": sound3,
+            "Favourites_Icon": sound4,
+            "Settings_Icon": sound5,
+            "Media_Icon": sound6,
+            "Share_Icon": sound7,
+            "Search_Icon": sound8,
+            "Location_Icon": sound9
+        };
+
+        const hoverMap = {
+            "Timeline_Icon": "img/Timeline_Icon2.svg",
+            "Archive_Icon": "img/Archive_Icon2.svg",
+            "Diary_Icon": "img/Diary_Icon2.svg",
+            "Favourites_Icon": "img/Favourites_Icon2.svg",
+            "Settings_Icon": "img/Settings_Icon2.svg",
+            "Media_Icon": "img/Media_Icon2.svg",
+            "Share_Icon": "img/Share_Icon2.svg",
+            "Search_Icon": "img/Search_Icon2.svg",
+            "Location_Icon": "img/Location_Icon2.svg"
+        };
+
+        Object.keys(map).forEach(id => {
+            const icon = document.getElementById(id);
+            const sound = map[id];
+
+            icon.addEventListener("mousedown", () => {
+                sound.stop();
+                sound.play();
+
+                icon.classList.remove("shaking");
+                icon.classList.add("pressed");
+            });
+
+            icon.addEventListener("mouseup", () => {
+                icon.classList.remove("pressed");
+            });
+
+            icon.addEventListener("mouseleave", () => {
+                icon.classList.remove("pressed");
+                icon.classList.remove("shaking");
+            });
+
+            icon.addEventListener("mouseenter", () => {
+                sound10.stop();
+                sound10.play();
+
+                icon.classList.add("shaking");
+
+                if (hoverMap[id]) {
+                    icon.dataset.original = icon.src;
+                    icon.src = hoverMap[id];
+                }
+            });
+
+            icon.addEventListener("mouseleave", () => {
+                icon.classList.remove("shaking");
+
+                if (icon.dataset.original) {
+                    icon.src = icon.dataset.original;
+                }
+            });
+        });
+    };
+</script>
+
+</body>
+</html>
