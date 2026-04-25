@@ -1,0 +1,158 @@
+<html>
+
+    <head>
+        <style>
+        body {
+            margin: 0;
+            background-color: #472f32;;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .icongrid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+
+            justify-items: center;
+        }
+
+        .icongrid img {
+            width: clamp(80px, 10vw, 160px);
+            height: auto;
+            cursor: pointer;
+        }
+
+        .icongrid img {
+            transition: transform 0.2s ease;
+        }
+
+        .icongrid img:hover {
+            transform: scale(1.05);
+
+        }
+
+        .icongrid img:active {
+    transform: scale(0.9);
+}
+
+        @keyframes shake {
+    0% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(1px, -1px) rotate(-1deg); }
+    50% { transform: translate(-1px, 1px) rotate(1deg); }
+    75% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(0px, 0px) rotate(-1deg); }
+}
+
+.shaking {
+    animation: shake 0.15s infinite;
+}
+        </style>
+
+        <title>
+            My Website
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"> </script>
+    </head>
+
+<body>
+
+    <div class="icongrid">
+
+
+<img id="Timeline_Icon" src="img/Timeline_Icon.svg" onmouseover="this.src='img/Timeline_Icon2.svg';"onmouseout="this.src='img/Timeline_Icon.svg';"/>
+<img id="Archive_Icon" src="img/Archive_Icon.svg" onmouseover="this.src='img/Archive_Icon2.svg';"onmouseout="this.src='img/Archive_Icon.svg';"/>
+<img id="Diary_Icon" src="img/Diary_Icon.svg" onmouseover="this.src='img/Diary_Icon2.svg';"onmouseout="this.src='img/Diary_Icon.svg';"/>
+<img id="Favourites_Icon" src="img/Favourites_Icon.svg" onmouseover="this.src='img/Favourites_Icon2.svg';"onmouseout="this.src='img/Favourites_Icon.svg';"/>
+<img id="Settings_Icon" src="img/Settings_Icon.svg" onmouseover="this.src='img/Settings_Icon2.svg';"onmouseout="this.src='img/Settings_Icon.svg';"/>
+<img id="Media_Icon" src="img/Media_Icon.svg" onmouseover="this.src='img/Media_Icon2.svg';"onmouseout="this.src='img/Media_Icon.svg';"/>
+<img id="Share_Icon" src="img/Share_Icon.svg" onmouseover="this.src='img/Share_Icon2.svg';"onmouseout="this.src='img/Share_Icon.svg';"/>
+<img id="Search_Icon" src="img/Search_Icon.svg" onmouseover="this.src='img/Search_Icon2.svg';"onmouseout="this.src='img/Search_Icon.svg';"/>
+<img id="Location_Icon" src="img/Location_Icon.svg" onmouseover="this.src='img/Location_Icon2.svg';"onmouseout="this.src='img/Location_Icon.svg';"/>
+
+
+<script>
+    var sound1 = new buzz.sound("sound/ticks.mp3");
+    var sound2 = new buzz.sound("sound/files.mp3");
+    var sound3 = new buzz.sound("sound/pen.wav");
+    var sound4 = new buzz.sound("sound/star.mp3");
+    var sound5 = new buzz.sound("sound/gears.mp3");
+    var sound6 = new buzz.sound("sound/media.mp3");
+    var sound7 = new buzz.sound("sound/512410__kievinay__paper-rattling.mp3");
+    var sound8 = new buzz.sound("sound/searching.wav");
+    var sound9 = new buzz.sound("sound/flag.wav");
+    var sound10 = new buzz.sound("sound/click.mp3")
+
+    window.onload = function(){
+        document.getElementById("Timeline_Icon").addEventListener('mouseup',function () {
+            sound1.stop();
+            sound1.play();
+        });
+        document.getElementById("Archive_Icon").addEventListener('mouseup',function () {
+            sound2.stop();
+            sound2.play();
+        });
+        document.getElementById("Diary_Icon").addEventListener('mouseup',function() {
+            sound3.stop();
+            sound3.play();
+        });
+        document.getElementById("Favourites_Icon").addEventListener('mouseup',function() {
+            sound4.stop();
+            sound4.play();
+        });
+        document.getElementById("Settings_Icon").addEventListener('mouseup',function() {
+            sound5.stop();
+            sound5.play();
+        });
+        document.getElementById("Media_Icon").addEventListener('mouseup',function() {
+            sound6.stop();
+            sound6.play();
+        });
+        document.getElementById("Share_Icon").addEventListener('mouseup',function () {
+            sound7.stop();
+            sound7.play();
+        });
+        document.getElementById("Search_Icon").addEventListener('mouseup',function () {
+            sound8.stop();
+            sound8.play();
+        });
+        document.getElementById("Location_Icon").addEventListener('mouseup',function() {
+            sound9.stop();
+            sound9.play();
+        });
+    };
+
+
+        const icons = document.querySelectorAll(".icongrid img");
+
+icons.forEach(icon => {
+
+    icon.addEventListener("mouseenter", () => {
+        sound10.stop();
+        sound10.play();
+    });
+
+    icon.addEventListener("mousedown", () => {
+        icon.classList.add("shaking");
+    });
+
+    icon.addEventListener("mouseup", () => {
+        icon.classList.remove("shaking");
+    });
+
+    icon.addEventListener("mouseleave", () => {
+        icon.classList.remove("shaking");
+    });
+
+});
+
+
+</script>
+
+</div>
+</body>
+
+</html>
